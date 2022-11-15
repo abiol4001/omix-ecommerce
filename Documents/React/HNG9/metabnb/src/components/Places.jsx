@@ -1,5 +1,3 @@
-import React, { useState } from "react";
-import Frame1 from "/Frame 1.png";
 import Locations from "./Locations";
 import images from "./images";
 import {IoMdOptions} from "react-icons/io"
