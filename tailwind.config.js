@@ -9,7 +9,11 @@ module.exports = {
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      backgroundImage: {
+        'sport': "url('/sport.png)"
+      }
+    },
   },
   plugins: [],
   // plugins: [require("daisyui")],
