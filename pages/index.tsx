@@ -1,13 +1,17 @@
+import { useState } from 'react'
 import Head from 'next/head'
-import Image from 'next/image'
 import { Inter } from 'next/font/google'
 import styles from '@/styles/Home.module.css'
 import { category, newCollections } from '@/data/category'
 import SimpleSlider from '@/components/Slider/SimpleSlider'
+import { use } from 'react'
 
 const inter = Inter({ subsets: ['latin'] })
 
 export default function Home() {
+
+const [isFavorite, setisFavorite] = useState(false)
+  
   return (
     <div>
       {/* //Hero Section */}
@@ -56,7 +60,7 @@ export default function Home() {
       {/* Best Selling Section */}
       <section className='px-[112px] my-[80px]'>
         <h4 className='text-[32px] font-[700] mb-8'>Best Selling</h4>
-              <SimpleSlider />
+        <SimpleSlider handleFavorite={() => setisFavorite(prevFav => !prevFav)} isFavorite={isFavorite} />
       </section>
       {/* New collections Section */}
       <section className='px-[112px] my-[80px]'>
@@ -72,7 +76,7 @@ export default function Home() {
       </section>
 
       {/* Sport Section */}
-      <section className='bg-[url("/sport.png")] bg-contain md:h-[700px]'>
+      <section className='bg-[url("/sport.png")] bg-contain md:h-[700px] w-[100vw] overflow-hidden'>
         <div className='translate-x-1/2 translate-y-64'>
           <p className='text-[16px] font-[300]'>Free shipping on all orders</p>
           <p className='text-[40px] font-[700] mb-8'>SPORT COLLECTION</p>

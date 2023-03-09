@@ -1,20 +1,29 @@
 import { sliderData } from '@/data/sliderData';
-import React, {useState} from 'react'
+import React, { ReactNode, useState } from 'react'
+import { MdOutlineFavorite, MdOutlineFavoriteBorder } from 'react-icons/md';
 import Slider from "react-slick"
 import NextArrow from './NextArrow';
 import PrevArrow from './PrevArrow';
 
 type Settings = {
-    className: string;
-    infinite: boolean;
-    centerPadding: string;
-    slidesToShow: number;
-    swipeToSlide: boolean;
-    afterChange: (index: number) => void;
+    className?: string;
+    infinite?: boolean;
+    centerPadding?: string;
+    slidesToShow?: number;
+    swipeToSlide?: boolean;
+    nextArrow?: ReactNode,
+    prevArrow?: ReactNode,
 };
 
-const SimpleSlider = () => {
-    const settings = {
+type Props = {
+    handleFavorite?: () => void,
+    isFavorite?: boolean
+}
+
+
+
+const SimpleSlider: React.FC<Props> = ({handleFavorite,isFavorite}) => {
+    const settings: Settings = {
         className: "center",
         infinite: true,
         centerPadding: "60px",
@@ -23,19 +32,24 @@ const SimpleSlider = () => {
         nextArrow: <PrevArrow />,
         prevArrow: <NextArrow />
     }
-  return (
-      <div>
-          <h2>Swipe To Slide</h2>
-          <Slider {...settings}>
-              {sliderData.map(item => (
-                  <div>
-                      <img src={item.image} alt={item.name} className="h-[350px]" />
-                      <p className='text-center text-[15px] font-[300] mt-4'>{item.name}</p>
-                  </div>
-              ))}
-          </Slider>
-      </div>
-  )
+    return (
+        <div>
+            <Slider {...settings}>
+                {sliderData.map(item => (
+                    <div className='relative rounded-xl max-w-[280px]'>
+                        <div className='h-[400px] w-[280px]'>
+                            <img src={item.image} alt={item.name} className="h-[100%] w-[100%]" />
+                            <div className='rounded-[50%] bg-white absolute top-5 right-5 p-2 cursor-pointer' >
+                                {isFavorite ? <MdOutlineFavorite /> : <MdOutlineFavoriteBorder />}
+                            </div>
+                        </div>
+                        <p className=' text-[15px] font-[300] mt-3'>{item.name}</p>
+                        <p className=' text-[15px] font-[300] mt-1'>{item.price}</p>
+                    </div>
+                ))}
+            </Slider>
+        </div>
+    )
 }
 
 export default SimpleSlider
